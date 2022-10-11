@@ -9,9 +9,10 @@ public class ECSManager : MonoBehaviour
     private EntityManager _entityManager;
     [SerializeField] private GameObject _sheepPrefab;
     [SerializeField] private int _numSheep;
+    [SerializeField] private float _sheepSpeed;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
 
@@ -26,12 +27,12 @@ public class ECSManager : MonoBehaviour
             
             var spawnPosition = 
                 transform.TransformPoint
-                (new float3(Random.Range(-50,50),0, Random.Range(-50,50)));
+                (new float3(Random.Range(-50,50),Random.Range(0,100), Random.Range(-50,50)));
             
             _entityManager.SetComponentData
                 (instance, new Translation { Value = spawnPosition });
-            /*_entityManager.SetComponentData
-                (instance, new Rotation { Value = new quaternion(0, 0, 0, 0) });*/
+            
+            
         }
     }
 }

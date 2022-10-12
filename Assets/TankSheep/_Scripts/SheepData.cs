@@ -1,6 +1,6 @@
 ﻿using Unity.Entities;
 
-namespace New_Folder._Scripts
+namespace TankSheep._Scripts
 {
     [GenerateAuthoringComponent]
     public struct SheepData: IComponentData

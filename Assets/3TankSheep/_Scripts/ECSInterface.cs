@@ -25,32 +25,44 @@ namespace TankSheep._Scripts
         private GameObject _sheepPrefab;
 
         private EntityManager _entityManager;
+        private Entity _prefab;
 
 
+        private int xPos = 0;
         private void Awake()
         {
             _defaultGameObjectInjectionWorld = World.DefaultGameObjectInjectionWorld;
-            var settings =
-                GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, null);
-            var prefab =
-                GameObjectConversionUtility.ConvertGameObjectHierarchy(_sheepPrefab, settings);
+            var settings = GameObjectConversionSettings.FromWorld
+                    (World.DefaultGameObjectInjectionWorld, null);
+            
+            _prefab = GameObjectConversionUtility.ConvertGameObjectHierarchy
+                (_sheepPrefab, settings);
 
             _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
 
 
             for (int i = 0; i < 8; i++)
             {
-                var instance = _entityManager.Instantiate(prefab);
 
-                var spawnPosition = transform.TransformPoint
-                (new float3
-                    (i*2, 0,0));
-
-                _entityManager.SetComponentData
-                    (instance, new Translation {Value = spawnPosition});
             }
         }
 
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                var instance = _entityManager.Instantiate(_prefab);
+
+                var spawnPosition = transform.TransformPoint
+                (new float3
+                    (xPos, 0,0));
+
+                _entityManager.SetComponentData
+                    (instance, new Translation {Value = spawnPosition});
+                xPos += 2;
+            }
+        }
 
         private void OnEnable()
         {
@@ -68,7 +80,8 @@ namespace TankSheep._Scripts
                 .EntityManager;
 
 
-            _entityQuery = _entityManager.CreateEntityQuery(ComponentType.ReadOnly<T>());
+            _entityQuery = _entityManager.CreateEntityQuery
+                 (ComponentType.ReadOnly<T>());
 
 
             _sheepCounter.text = _entityQuery.CalculateEntityCount().ToString();

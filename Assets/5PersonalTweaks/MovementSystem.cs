@@ -10,9 +10,11 @@ namespace _5PersonalTweaks
         protected override void OnUpdate()
         {
             Entities.WithName("Test").ForEach(
-                (ref Rotation rotation, ref Translation translation, ref CubeData cubeData) =>
+                (ref Rotation rotation, 
+                    ref Translation translation,
+                    in CubeData cubeData) =>
                 {
-                    translation.Value.z += 1;
+                    translation.Value.z += cubeData.Speed;
                 }).Schedule();
         }
     }

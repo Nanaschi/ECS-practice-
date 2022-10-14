@@ -7,5 +7,6 @@ using UnityEngine;
 [GenerateAuthoringComponent]
 public struct CubeData : IComponentData
 {
-
+    [Range(0,10)]
+    public float Speed;
 }

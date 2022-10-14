@@ -387,6 +387,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cubeData: {fileID: 5453409673276240716, guid: 69b239630c40a724c99e2d1bb5e38327,
     type: 3}
+  _sphereData: {fileID: 6601069770705108936, guid: f55cbc8a08132c84db3f5ee49c18692d,
+    type: 3}
+  _amountOfCubes: 1
+  _rangeDistance: 0
 --- !u!4 &1142677143
 Transform:
   m_ObjectHideFlags: 0
